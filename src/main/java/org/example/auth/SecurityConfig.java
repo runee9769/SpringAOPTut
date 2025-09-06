@@ -23,16 +23,15 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableMethodSecurity
 @Data
 public class SecurityConfig {
-    @Autowired
-    private final PasswordEncoder passwordEncoder;
-
-    @Autowired
     private final UserDetailsImpl userDetailsServiceImpl;
+    private final PasswordEncoder passwordEncoder;
+    private final JwtFilter jwtAuthFilter;
 
-    @Bean
     @Autowired
-    public UserDetailsService userDetailsService(UserRepository userRepository, PasswordEncoder passwordEncoder){
-        return new UserDetailsImpl(userRepository,passwordEncoder);
+    public SecurityConfig(UserDetailsImpl userDetailsServiceImpl, PasswordEncoder passwordEncoder, JwtFilter jwtAuthFilter) {
+        this.userDetailsServiceImpl = userDetailsServiceImpl;
+        this.passwordEncoder = passwordEncoder;
+        this.jwtAuthFilter = jwtAuthFilter;
     }
 
     @Bean

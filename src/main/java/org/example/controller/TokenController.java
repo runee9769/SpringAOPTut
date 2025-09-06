@@ -41,23 +41,16 @@ public class TokenController {
                     )
             );
 
-            // If authentication is successful, generate tokens.
-            if (authentication.isAuthenticated()) {
-                RefreshToken refreshToken = refreshTokenService.createRefreshToken(authRequestDTO.getUsername());
-                JwtResponseDTO response = JwtResponseDTO.builder()
-                        .accessToken(jwtService.generateToken(authRequestDTO.getUsername()))
-                        .token(refreshToken.getToken())
-                        .build();
-                return new ResponseEntity<>(response, HttpStatus.OK);
-            } else {
-                // This part is technically unreachable if authenticate throws exception, but good for clarity.
-                return new ResponseEntity<>("Invalid user request!", HttpStatus.BAD_REQUEST);
-            }
+            RefreshToken refreshToken = refreshTokenService.createRefreshToken(authRequestDTO.getUsername());
+            JwtResponseDTO response = JwtResponseDTO.builder()
+                    .accessToken(jwtService.generateToken(authRequestDTO.getUsername()))
+                    .token(refreshToken.getToken())
+                    .build();
+
+            return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (BadCredentialsException e) {
-            // Handle the case where credentials are wrong
             return new ResponseEntity<>("Invalid credentials", HttpStatus.UNAUTHORIZED);
         } catch (Exception e) {
-            // Handle other potential errors
             return new ResponseEntity<>("An error occurred during authentication", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

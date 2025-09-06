@@ -45,7 +45,7 @@ public class JwtService {
                 .setClaims(claims)
                 .setSubject(username)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis()*3600000))
+                .setExpiration(new Date(System.currentTimeMillis() + 3600000))
                 .signWith(getSignKey(), SignatureAlgorithm.HS256).compact();
     }
     public String generateToken(String username) {

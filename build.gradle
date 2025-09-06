@@ -15,7 +15,6 @@ ext {
 }
 
 dependencies {
-    // Replaced libs.guava with a direct dependency
     implementation 'com.google.guava:guava:33.0.0-jre'
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web'
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-actuator'
@@ -38,7 +37,6 @@ dependencies {
     implementation 'io.jsonwebtoken:jjwt-impl:0.12.5'
     implementation 'io.jsonwebtoken:jjwt-jackson:0.12.5'
 
-    // Replaced libs.junit with the standard Spring Boot test starter
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
