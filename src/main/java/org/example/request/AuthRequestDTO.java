@@ -1,17 +1,15 @@
 package org.example.request;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.example.models.UserInfoDto;
 
-@Builder
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class AuthRequestDTO {
-    private UserInfoDto userInfoDto;
-
-    public String getUsername() {
-        return userInfoDto.getUsername();
-    }
-
-    public Object getPassword() {
-        return userInfoDto.getPassword();
-    }
+    private String username;
+    private String password;
 }

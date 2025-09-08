@@ -26,7 +26,7 @@ public class AuthController {
     @Autowired
     private UserDetailsImpl userDetails;
 
-    @PostMapping("auth/v1/signUp")
+    @PostMapping(value = "auth/v1/signUp", consumes = "application/json", produces = "application/json")
     public ResponseEntity signUp(@RequestBody UserInfoDto userInfoDto){
         try{
             Boolean isSignUp = userDetails.signUp(userInfoDto);
